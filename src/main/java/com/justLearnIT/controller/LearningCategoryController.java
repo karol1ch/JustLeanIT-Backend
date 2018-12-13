@@ -1,0 +1,30 @@
+package com.justLearnIT.controller;
+
+import com.justLearnIT.service.LearningCategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin
+@RestController
+@RequestMapping("/learning/{category}")
+public class LearningCategoryController {
+
+    private final LearningCategoryService learningCategoryService;
+
+    public LearningCategoryController(@Autowired LearningCategoryService learningCategoryService) {
+        this.learningCategoryService = learningCategoryService;
+    }
+
+    @GetMapping("/topics")
+    public ResponseEntity<?> getTopics(@PathVariable("category") String category) {
+        return new ResponseEntity(learningCategoryService.getTopicsByCategoryName(category), HttpStatus.OK);
+    }
+
+    @GetMapping("/category")
+    public ResponseEntity<?> getCategory(@PathVariable("category") String category) {
+        return new ResponseEntity(learningCategoryService.getCategoryByCategoryName(category), HttpStatus.OK);
+    }
+
+}
