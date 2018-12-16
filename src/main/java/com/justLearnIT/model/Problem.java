@@ -21,9 +21,13 @@ public class Problem {
     private String content;
     @ManyToOne
     private Category category;
+    @Column(name="input_description")
     private String inputDescription;
+    @Column(name="output_description")
     private String outputDescription;
+    @Column(name="number_of_accepted_solutions")
     private int numberOfAcceptedSolutions;
     private String difficulty;
+    @Column(name="author")
     private String userName;
 }
