@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface AnnouncementDAO {
 
-    List<Announcement> getAnnouncement();
+    List getAnnouncements();
+
+    Announcement getAnnouncementByName(String name);
+
 }
