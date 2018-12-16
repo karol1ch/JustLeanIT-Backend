@@ -21,7 +21,7 @@ public class Submit {
     private Integer compilationReturnCode;
     private String compilationStdout;
     private String compilationStderr;
-    private String userName;
+    private String username;
     @ManyToOne
     private Problem problem;
 }
