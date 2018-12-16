@@ -21,7 +21,7 @@ public class TopicDAOImpl implements TopicDAO {
 
 
     @Override
-    public Topic getTopicById(int topicId) {
+    public Topic getTopicById(long topicId) {
         Session session = emf.createEntityManager().unwrap(Session.class);
         Query query = session.createQuery("from Topic where id = :id");
         query.setParameter("id", topicId);

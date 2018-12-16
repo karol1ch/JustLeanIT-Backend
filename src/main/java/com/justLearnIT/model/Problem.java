@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-class Problem {
+public class Problem {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
