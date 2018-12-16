@@ -4,7 +4,7 @@ import com.justLearnIT.model.Topic;
 import java.util.List;
 
 public interface TopicDAO {
+    Topic getTopicById(int topicID);
     List<Topic> getTopicsByCategoryName(String categoryName);
-
-    Topic getTopicById(long topicId);
+    void saveOrUpdate(Topic topic);
 }

@@ -5,7 +5,9 @@ import com.justLearnIT.model.Category;
 import java.util.List;
 
 public interface CategoryDAO {
-    List<Category> getCategories();
+    List getCategories();
 
     Category getCategoryByCategoryName(String categoryName);
+
+    void saveOrUpdate(Category category);
 }
