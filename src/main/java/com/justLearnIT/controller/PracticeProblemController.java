@@ -29,8 +29,9 @@ public class PracticeProblemController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<Void> registerSubmit(@PathVariable("problemID") int problemId, @RequestBody Submit submit) {
+    public ResponseEntity<Void> registerSubmit(@PathVariable("category") String category, @PathVariable("problemID") int problemId, @RequestBody Submit submit) {
         submit.setProblem(practiceProblemService.getProblemById(problemId));
+        submit.setProgrammingLanguage(practiceProblemService.getProgrammingLanguageByName(category));
 
         practiceProblemService.saveSubmit(submit);
 

@@ -15,15 +15,19 @@ import javax.persistence.*;
 @Entity
 public class Problem {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String content;
     @ManyToOne
     private Category category;
+    @Column(name = "input_description")
     private String inputDescription;
+    @Column(name = "output_description")
     private String outputDescription;
+    @Column(name = "number_of_accepted_solutions")
     private int numberOfAcceptedSolutions;
     private String difficulty;
-    private String userName;
+    @Column(name = "author")
+    private String username;
 }

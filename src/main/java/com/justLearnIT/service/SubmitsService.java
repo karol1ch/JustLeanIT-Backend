@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface SubmitsService {
     List<Submit> getSubmits();
+
+    Submit getSubmitById(long submitId);
 }
