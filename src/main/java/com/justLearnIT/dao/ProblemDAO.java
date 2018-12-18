@@ -7,5 +7,5 @@ import java.util.List;
 public interface ProblemDAO {
     List<Problem> getProblemsByCategoryName(String category);
 
-    Problem getProblemById(long problemID);
+    Problem getProblemById(int problemID);
 }

@@ -40,4 +40,9 @@ public class SubmitResultServiceImpl implements SubmitResultService {
     public List<SubmitResult> getSubmitResultsBySubmit(Submit submit) {
         return submitResultDAO.getAllSubmitResultsBySubmitId(submit);
     }
+
+    @Override
+    public Problem getProblemBySubmitId(int submitId) {
+        return submitDAO.getSubmitBySubmitId(submitId).getProblem();
+    }
 }

@@ -1,14 +1,13 @@
 package com.justLearnIT.service;
 
-import com.justLearnIT.dao.ProblemDAO;
-import com.justLearnIT.dao.ProgrammingLanguageDAO;
-import com.justLearnIT.dao.SubmitDAO;
-import com.justLearnIT.dao.TestDAO;
+import com.justLearnIT.dao.*;
 import com.justLearnIT.model.Problem;
 import com.justLearnIT.model.ProgrammingLanguage;
 import com.justLearnIT.model.Submit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PracticeProblemServiceImpl implements PracticeProblemService {
@@ -17,19 +16,22 @@ public class PracticeProblemServiceImpl implements PracticeProblemService {
     private final SubmitDAO submitDAO;
     private final TestDAO testDAO;
     private final ProgrammingLanguageDAO programmingLanguageDAO;
+    private final AvailableProgrammingLanguageDAO availableProgrammingLanguageDAO;
 
     public PracticeProblemServiceImpl(@Autowired ProblemDAO problemDAO,
                                       @Autowired SubmitDAO submitDAO,
                                       @Autowired TestDAO testDAO,
-                                      @Autowired ProgrammingLanguageDAO programmingLanguageDAO) {
+                                      @Autowired ProgrammingLanguageDAO programmingLanguageDAO,
+                                      @Autowired AvailableProgrammingLanguageDAO availableProgrammingLanguageDAO) {
         this.problemDAO = problemDAO;
         this.submitDAO = submitDAO;
         this.testDAO = testDAO;
         this.programmingLanguageDAO = programmingLanguageDAO;
+        this.availableProgrammingLanguageDAO = availableProgrammingLanguageDAO;
     }
 
     @Override
-    public Problem getProblemById(long problemID) {
+    public Problem getProblemById(int problemID) {
         return problemDAO.getProblemById(problemID);
     }
 
@@ -46,5 +48,10 @@ public class PracticeProblemServiceImpl implements PracticeProblemService {
     @Override
     public ProgrammingLanguage getProgrammingLanguageByName(String name) {
         return programmingLanguageDAO.getProgrammingLanguageByName(name);
+    }
+
+    @Override
+    public List<ProgrammingLanguage> getAvailableProgrammingLanguagesForProblem(int problemID) {
+        return availableProgrammingLanguageDAO.getAvailableProgrammingLanguagesForProblem(problemID);
     }
 }

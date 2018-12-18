@@ -2,6 +2,7 @@ package com.justLearnIT.controller;
 
 
 import com.justLearnIT.model.IncompletedResponse;
+import com.justLearnIT.model.Problem;
 import com.justLearnIT.model.Submit;
 import com.justLearnIT.model.SubmitResult;
 import com.justLearnIT.service.SubmitResultService;
@@ -27,13 +28,16 @@ public class SubmitResultController {
     public ResponseEntity<IncompletedResponse<SubmitResult>> getSubmitResults(@PathVariable("submitId") long submitId) {
         Submit submit = submitResultService.getSubmitById(submitId);
 
-        System.out.println(submit);
-
         long numberOfTestsByProblem = submitResultService.getNumberOfTestsByProblem(submit.getProblem());
         List<SubmitResult> results = submitResultService.getSubmitResultsBySubmit(submit);
 
         IncompletedResponse<SubmitResult> response = new IncompletedResponse<>(results, numberOfTestsByProblem == results.size());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/problem")
+    public ResponseEntity<Problem> getProblem(@PathVariable("submitId") int submitId) {
+        return new ResponseEntity<>(submitResultService.getProblemBySubmitId(submitId), HttpStatus.OK);
     }
 }

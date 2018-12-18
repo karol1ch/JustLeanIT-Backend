@@ -12,4 +12,6 @@ public interface SubmitResultService {
     long getNumberOfTestsByProblem(Problem problem);
 
     List<SubmitResult> getSubmitResultsBySubmit(Submit submit);
+
+    Problem getProblemBySubmitId(int submitId);
 }

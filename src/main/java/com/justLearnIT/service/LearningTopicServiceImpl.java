@@ -15,7 +15,7 @@ public class LearningTopicServiceImpl implements LearningTopicService {
     }
 
     @Override
-    public Topic getTopicById(long topicId) {
+    public Topic getTopicById(int topicId) {
         return topicDAO.getTopicById(topicId);
     }
 }

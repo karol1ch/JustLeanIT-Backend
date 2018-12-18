@@ -1,7 +1,9 @@
 package com.justLearnIT.controller;
 
 import com.justLearnIT.model.Problem;
+import com.justLearnIT.model.ProgrammingLanguage;
 import com.justLearnIT.model.Submit;
+import com.justLearnIT.model.SubmitReact;
 import com.justLearnIT.service.PracticeProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -24,14 +27,25 @@ public class PracticeProblemController {
     }
 
     @GetMapping
-    public ResponseEntity<Problem> getProblem(@PathVariable("problemID") long problemID) {
+    public ResponseEntity<Problem> getProblem(@PathVariable("problemID") int problemID) {
         return new ResponseEntity<>(practiceProblemService.getProblemById(problemID), HttpStatus.OK);
     }
 
+    @GetMapping("/availableLanguages")
+    public ResponseEntity<List<ProgrammingLanguage>> getAvailableLanguagesForProblem(
+            @PathVariable("problemID") int problemID) {
+        return new ResponseEntity<>(practiceProblemService.getAvailableProgrammingLanguagesForProblem(problemID), HttpStatus.OK);
+    }
+
     @PostMapping("/submit")
-    public ResponseEntity<Void> registerSubmit(@PathVariable("category") String category, @PathVariable("problemID") int problemId, @RequestBody Submit submit) {
-        submit.setProblem(practiceProblemService.getProblemById(problemId));
-        submit.setProgrammingLanguage(practiceProblemService.getProgrammingLanguageByName(category));
+    public ResponseEntity<Void> registerSubmit(@PathVariable("problemID") int problemId, @RequestBody SubmitReact submitReact) {
+
+        Submit submit = Submit.builder()
+                .codeContent(submitReact.getCodeContent())
+                .username(submitReact.getUsername())
+                .programmingLanguage(practiceProblemService.getProgrammingLanguageByName(submitReact.getProgrammingLanguageName()))
+                .problem(practiceProblemService.getProblemById(problemId))
+                .build();
 
         practiceProblemService.saveSubmit(submit);
 
@@ -41,5 +55,7 @@ public class PracticeProblemController {
 
         return ResponseEntity.created(location).build();
     }
+
+
 
 }

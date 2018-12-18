@@ -9,10 +9,16 @@ public class PaginatedResponse<T> {
     public boolean hasMore;
 
     public PaginatedResponse(List<T> list, int pageNumber) {
-        this.hasMore = list.size() >= (pageNumber + 1) * pageSize;
-        if (hasMore)
-            this.list = list.subList(pageNumber * pageSize, this.hasMore ? (pageNumber + 1) * pageSize : list.size());
-        else
+        System.out.println("pageNumber=" + pageNumber + ", list.size()=" + list.size());
+
+        int begin = pageNumber * pageSize;
+        int end = Math.min((pageNumber + 1) * pageSize, list.size());
+        if (begin < end) {
+            this.hasMore = list.size() > end;
+            this.list = list.subList(pageNumber * pageSize, end);
+        } else {
+            this.hasMore = false;
             this.list = Collections.emptyList();
+        }
     }
 }

@@ -18,7 +18,7 @@ public class LearningTopicController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getTopic(@PathVariable("topicID") long topicID) {
+    public ResponseEntity<?> getTopic(@PathVariable("topicID") int topicID) {
         return new ResponseEntity(learningTopicService.getTopicById(topicID), HttpStatus.OK);
     }
 
