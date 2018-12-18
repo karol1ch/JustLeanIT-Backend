@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -39,5 +40,14 @@ public class SubmitResultController {
     @GetMapping("/problem")
     public ResponseEntity<Problem> getProblem(@PathVariable("submitId") int submitId) {
         return new ResponseEntity<>(submitResultService.getProblemBySubmitId(submitId), HttpStatus.OK);
+    }
+
+    @GetMapping("/details")
+    public ResponseEntity<Submit> getSubmitDetails(@PathVariable("submitId") int submitId) {
+        return new ResponseEntity<>(
+                Optional.of(submitResultService.getSubmitById(submitId))
+                        .filter(Submit::isProcessed)
+                        .orElse(null),
+                HttpStatus.OK);
     }
 }

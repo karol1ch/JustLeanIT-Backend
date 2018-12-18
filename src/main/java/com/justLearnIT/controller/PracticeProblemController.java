@@ -38,7 +38,7 @@ public class PracticeProblemController {
     }
 
     @PostMapping("/submit")
-    public ResponseEntity<Void> registerSubmit(@PathVariable("problemID") int problemId, @RequestBody SubmitReact submitReact) {
+    public ResponseEntity<Integer> registerSubmit(@PathVariable("problemID") int problemId, @RequestBody SubmitReact submitReact) {
 
         Submit submit = Submit.builder()
                 .codeContent(submitReact.getCodeContent())
@@ -51,11 +51,8 @@ public class PracticeProblemController {
 
         System.out.println(submit);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/result").buildAndExpand().toUri();
-
-        return ResponseEntity.created(location).build();
+        return new ResponseEntity<>(submit.getId(), HttpStatus.OK);
     }
-
 
 
 }

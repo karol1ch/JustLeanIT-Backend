@@ -2,14 +2,17 @@ package com.justLearnIT.dao;
 
 import com.justLearnIT.model.Submit;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class SubmitDAOImpl implements SubmitDAO {
 
     @Autowired
@@ -33,7 +36,9 @@ public class SubmitDAOImpl implements SubmitDAO {
     @Override
     public void saveOrUpdate(Submit submit) {
         Session session = emf.createEntityManager().unwrap(Session.class);
-        session.saveOrUpdate(submit);
+        Transaction tx = session.beginTransaction();
+        session.save(submit);
+        tx.commit();
     }
 
 }
