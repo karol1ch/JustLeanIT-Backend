@@ -34,6 +34,7 @@ public class HomeController {
 
     @GetMapping("/dzban")
     public ResponseEntity<?> getTip(){
+
         return new ResponseEntity(homeService.getRandTip(), HttpStatus.OK);
     }
 }

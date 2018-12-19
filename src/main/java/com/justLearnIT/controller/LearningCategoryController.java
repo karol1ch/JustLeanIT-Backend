@@ -32,7 +32,6 @@ public class LearningCategoryController {
     @GetMapping("/category/page={pageNumber}")
     public ResponseEntity<?> getCategoryPage(@PathVariable("category") String category, @PathVariable("pageNumber") int pageNumber) {
         PaginatedResponse<Topic> response = new PaginatedResponse<>(learningCategoryService.getTopicsByCategoryName(category), pageNumber);
-
         return new ResponseEntity(response, HttpStatus.OK);
     }
 

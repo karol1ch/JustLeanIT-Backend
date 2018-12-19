@@ -9,7 +9,5 @@ public interface HomeService {
 
     List<Announcement> getAnnouncements();
 
-    Announcement getAnnouncementByName(String name);
-
     TipOfADay getRandTip();
 }
