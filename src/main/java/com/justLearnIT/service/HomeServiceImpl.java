@@ -25,15 +25,12 @@ public class HomeServiceImpl implements HomeService {
         this.current = this.tipOfADayDAO.getRandTip();
     }
 
+
     @Override
     public List<Announcement> getAnnouncements() {
         return announcementDAO.getAnnouncements();
     }
 
-    @Override
-    public Announcement getAnnouncementByName(String name) {
-        return announcementDAO.getAnnouncementByName(name);
-    }
 
     @Override
     public TipOfADay getRandTip() {
