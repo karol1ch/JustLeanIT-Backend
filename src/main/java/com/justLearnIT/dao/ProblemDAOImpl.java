@@ -2,6 +2,7 @@ package com.justLearnIT.dao;
 
 import com.justLearnIT.model.Problem;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +29,13 @@ public class ProblemDAOImpl implements ProblemDAO {
         Session session = emf.createEntityManager().unwrap(Session.class);
 
         return session.get(Problem.class, problemID);
+    }
+
+    @Override
+    public void save(Problem problem) {
+        Session session = emf.createEntityManager().unwrap(Session.class);
+        Transaction tx = session.beginTransaction();
+        session.save(problem);
+        tx.commit();
     }
 }

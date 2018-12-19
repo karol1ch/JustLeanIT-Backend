@@ -1,16 +1,17 @@
 package com.justLearnIT.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@Builder
 @Entity
-@NoArgsConstructor
 public class Test {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int number;
     @Column(name = "is_open")

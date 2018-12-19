@@ -1,7 +1,9 @@
 package com.justLearnIT.dao;
 
 import com.justLearnIT.model.Problem;
+import com.justLearnIT.model.Test;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +25,16 @@ public class TestDAOImpl implements TestDAO {
                 .setParameter("problemId", problem.getId())
                 .list()
                 .size();
-                //.getFetchSize();
+        //.getFetchSize();
+
+        // FIXME: FIX THIS
+    }
+
+    @Override
+    public void save(Test test) {
+        Session session = emf.createEntityManager().unwrap(Session.class);
+        Transaction tx = session.beginTransaction();
+        session.save(test);
+        tx.commit();
     }
 }

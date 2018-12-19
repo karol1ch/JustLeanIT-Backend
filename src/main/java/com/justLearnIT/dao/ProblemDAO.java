@@ -8,4 +8,6 @@ public interface ProblemDAO {
     List<Problem> getProblemsByCategoryName(String category);
 
     Problem getProblemById(int problemID);
+
+    void save(Problem problem);
 }

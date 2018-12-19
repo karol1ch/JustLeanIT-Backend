@@ -1,7 +1,9 @@
 package com.justLearnIT.dao;
 
+import com.justLearnIT.model.AvailableProgrammingLanguage;
 import com.justLearnIT.model.ProgrammingLanguage;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,5 +23,13 @@ public class AvailableProgrammingLanguageDAOImpl implements AvailableProgramming
         return session.createQuery("select apl.programmingLanguage from AvailableProgrammingLanguage apl where apl.problem.id = :problemID")
                 .setParameter("problemID", problemID)
                 .list();
+    }
+
+    @Override
+    public void save(AvailableProgrammingLanguage availableProgrammingLanguage) {
+        Session session = emf.createEntityManager().unwrap(Session.class);
+        Transaction tx = session.beginTransaction();
+        session.merge(availableProgrammingLanguage);
+        tx.commit();
     }
 }
